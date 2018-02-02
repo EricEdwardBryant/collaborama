@@ -1,0 +1,90 @@
+## SOFTWARE
+
+This project is available on [GitHub](https://github.com/CicciaLab/Manuscript-ABE.git). The analysis requires [R](https://cloud.r-project.org), and recommends [RStudio](https://www.rstudio.com/products/rstudio/download/#download). After installing R & RStudio, and downloading this project, open the RStudio project file named `Manuscript-ABE.Rproj`. The analysis will aslo require several R packages. The following command will check for any missing required packages, and install them to ``r .Rprofile$Library_root`` (this directory can be changed by modifying the project's `.Rprofile`).
+
+```{r echo = TRUE}
+.Rprofile$install_requirements()
+```
+
+After all packages have been installed, prepare the workspace by loading requirements with the following command.
+
+```{r echo = TRUE, results = 'hide'}
+.Rprofile$load_requirements()
+```
+
+If everything is properly installed, you should see the following message in the R console.
+
+```{r echo = FALSE'}
+.Rprofile$load_requirements()
+```
+
+## DATASETS
+
+Before beginning the analysis, there are several datasets that must be downloaded. The following sections provide detailed instructions for downloading all required datasets.
+
+## Coding sequence coordinates
+
+Coding sequence (CDS) coordinates can be downloaded from the UCSC genome browser with the following command.
+
+```{r echo = TRUE, eval = FALSE}
+data_import$CDS(save_as = 'data/CDS/Hsapiens-UCSC-hg38.csv')
+data_import$CDS_contiguous_intervals(
+  given   = 'data/CDS/Hsapiens-UCSC-hg38.csv', 
+  save_as = 'data/CDS/Hsapiens-UCSC-hg38-contiguous-intervals.csv'
+)
+```
+
+## Cosmic
+
+To download the [Catalogue of Somatic Mutations in Cancer](https://cancer.sanger.ac.uk/cosmic/download) [@ForbesCOSMICsomaticcancer2017], first [register with a valid email address](https://cancer.sanger.ac.uk/cosmic/register), then download the `CosmicMutantExport.tsv.gz` dataset into the `data/COSMIC` directory using the following commands:
+
+```shell
+# In Terminal
+cd data/COSMIC
+sftp "your@email.com"@sftp-cancer.sanger.ac.uk         # Enter password when prompted
+get /files/grch38/cosmic/v83/CosmicMutantExport.tsv.gz
+get /files/grch38/cosmic/v83/VCF/CosmicCodingMuts.vcf.gz
+```
+
+After downloading the main Cosmic dataset, we will generate three processed versions of this dataset using the following commands. 
+
+```{r echo = TRUE, eval = FALSE}
+data_import$COSMIC_vcf_to_csv(
+  given   = 'data/COSMIC/CosmicCodingMuts.vcf.gz',
+  save_as = 'data/COSMIC/Cosmic-Coding.csv'
+)
+data_import$COSMIC_nonsense(
+  given   = 'data/COSMIC/Cosmic-Coding.csv',
+  save_as = 'data/COSMIC/Cosmic-Nonsense.csv'
+)
+```
+
+## ClinVar
+
+[Clinical Variants](https://www.ncbi.nlm.nih.gov/clinvar/) can be downloaded using the following commands:
+
+```shell
+# In Terminal
+# On macOS `wget` can be installed via homebrew `brew install wget`
+cd data/ClinVar
+wget ftp://ftp.ncbi.nlm.nih.gov/pub/clinvar/tab_delimited/variant_summary.txt.gz
+wget ftp://ftp.ncbi.nlm.nih.gov/pub/clinvar/tab_delimited/allele_gene.txt.gz
+wget ftp://ftp.ncbi.nlm.nih.gov/pub/clinvar/tab_delimited/README
+wget ftp://ftp.ncbi.nlm.nih.gov/pub/clinvar/README_VCF.txt
+wget ftp://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/clinvar.vcf.gz
+```
+
+```{r echo = TRUE, eval = FALSE}
+data_import$ClinVar_vcf_to_csv(
+  given   = 'data/ClinVar/clinvar.vcf.gz',
+  save_as = 'data/ClinVar/ClinVar.csv'
+)
+data_import$ClinVar_nonsense(
+  given   = 'data/ClinVar/ClinVar.csv',
+  save_as = 'data/ClinVar/ClinVar-Nonsense.csv'
+)
+```
+
+## Coriell
+
+Go to [Coriell](https://www.coriell.org/0/Sections/BrowseCatalog/Genes.aspx?PgId=5) and enter `*.*` into the search bar. Then click on `Export to Excel` and, when prompted, check the boxes for `ID`, `Description`, `Gene` and `Mutations`. Then click `Export All Samples in Grid`. Move this file to the `data/Coriell` directory of this project and rename the file to `Catalog-Export.csv`.

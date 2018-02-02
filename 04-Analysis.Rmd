@@ -1,0 +1,50 @@
+## Guide design
+
+```{r}
+analyses$Design_guides_to_model_transitions_with_BE3_and_ABE(
+  given   = 'data/COSMIC/Cosmic-Coding.csv',
+  save_as = 'data/Guides/Cosmic-Coding-ABE-BE3.csv'
+)
+
+analyses$Design_guides_to_model_transitions_with_BE3_and_ABE(
+  given   = 'data/ClinVar/ClinVar.csv',
+  save_as = 'data/Guides/ClinVar-ABE-BE3.csv'
+)
+
+#read_csv('data/Guides/Cosmic-Model-CtoT-Nonsense.csv') %>%
+#  filter(!is.na(BE3_safe), !is.na(ABE), !Gc) %>% 
+#  mutate(searched = ref_plus, chr = CHROM) %>%
+#  add_RFLP(width = 30, recognizes = 'c') %>%
+#  add_RFLP(width = 30, recognizes = 't') %>%
+#  select(-searched, -chr) %>%
+#  write_csv('data/Guides/Cosmic-Model-CtoT-Nonsense-SafeBE3-AnyABE-noGc.csv')
+#
+#read_csv('data/Guides/ClinVar-Model-CtoT-Nonsense.csv') %>%
+#  filter(!is.na(BE3_safe), !is.na(ABE), !Gc) %>%
+#  mutate(searched = ref_plus, chr = CHROM) %>%
+#  add_RFLP(width = 30, recognizes = 'c') %>%
+#  add_RFLP(width = 30, recognizes = 't') %>%
+#  select(-searched, -chr) %>%
+#  write_csv('data/Guides/ClinVar-Model-CtoT-Nonsense-SafeBE3-AnyABE-noGc.csv')
+```
+
+## ClinVar
+
+```{r}
+analyses$ClinVar_summary_of_variant_types(
+  given = 'data/ClinVar/ClinVar.csv',
+  save_as = 'data/ClinVar/ClinVar-summary-variant-types.csv'
+)
+analyses$ClinVar_summary_of_creating_vs_reverting(
+  given   = 'data/ClinVar/ClinVar.csv',
+  save_as = 'data/ClinVar/ClinVar-creating-vs-reverting.csv'
+)
+```
+
+```{r}
+figures$ClinVar_summary(
+  given = c(all = 'data/ClinVar/ClinVar-summary-variant-types.csv',
+            SNV = 'data/ClinVar/ClinVar-creating-vs-reverting.csv'),
+  save_as = 'figures/Clinvar-summary.pdf'
+)
+```

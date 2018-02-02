@@ -1,0 +1,46 @@
+---
+title: "ABE - extended methods"
+bibliography: 'references/library.bib'
+csl: 'format/cell.csl'
+output:
+  word_document:
+    reference_docx: 'format/template.docx'
+    pandoc_args: '--smart'
+params:
+  chunk_options: !r knitr::opts_chunk$set(echo = FALSE, message = FALSE, comment = '')
+---
+
+__Eric Bryant__^1^, __Pierre Billon__^2^, and __Alberto Ciccia__^2,3,\*^ 
+
+> ^1^ Department of Biological Sciences, Columbia University, New York, NY, USA \
+> ^2^ Department of Genetics & Development, Columbia University Medical Center, New York, NY, USA \
+> ^3^ Lead Contact \
+> ^\*^ Correspondence: <ac3685@columbia.edu>
+
+# SUMMARY
+
+```{r child = '2-Summary.Rmd'}
+```
+
+# SETUP & REQUIREMENTS
+
+```{r child = '3-Setup-and-Requirements.Rmd'}
+```
+
+# ANALYSIS
+
+```{r child = '4-Analysis.Rmd'}
+```
+
+#### SESSION INFORMATION
+
+```{r message = TRUE, comment=''}
+options(width = 101)
+.Rprofile$load_requirements(show_loaded = TRUE)
+```
+
+#### REFERENCES 
+<!--- 
+4th level header in Word template is re-defined 
+as a 1st level header with page-break
+--->
