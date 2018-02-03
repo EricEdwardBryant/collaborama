@@ -6,7 +6,16 @@
 .Rprofile$install_requirements <- function(Rprofile = .Rprofile, check_only = FALSE) {
   
   # Vectorized check for package installation status
-  .installed <- function(pkgs) pkgs %in% rownames(utils::installed.packages())
+  .installed <- function(pkgs, libs = .libPaths()) {
+    libs <- unlist(libs)
+    inst <- utils::installed.packages()
+    # Only worry about non-standard pkgs and the specified libs
+    installed_packages <- inst[
+      is.na(inst[,'Priority']) & (inst[,'LibPath'] %in% normalizePath(libs)),
+      'Package'
+    ] 
+    pkgs %in% installed_packages
+  }
 
   # Vectorized extraction of GitHub package commit SHA (i.e. version)
   .github_sha <- function(pkgs) sapply(pkgs, function(x) if (.installed(x)) utils::packageDescription(x)$GithubRef else 'not installed')
@@ -17,7 +26,7 @@
     pkgs <- gsub('^.*?/|@.*?$', '', url)
     sha  <- gsub('^.*?@', '', url)
 
-    not_installed <- !.installed(pkgs)
+    not_installed <- !.installed(pkgs, libs)
     wrong_version <- sha != .github_sha(pkgs)
     needs_install <- url[not_installed | wrong_version]
     if (!.check_only) {
@@ -30,7 +39,7 @@
 
   # Install from CRAN style repositories
   .install_from_repos <- function(pkgs, lib, .check_only = check_only) {
-    not_installed <- !.installed(pkgs)
+    not_installed <- !.installed(pkgs, lib)
     needs_install <- pkgs[not_installed]
     if (!.check_only) {
       lapply(needs_install, utils::install.packages, lib = lib)
