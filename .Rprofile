@@ -8,19 +8,16 @@
     Library_root = 'R/library',  # where to install packages
     # Packages to install from CRAN, Bioconductor and GitHub
     CRAN = c(
-      
       'tidyverse', # Collection of data manipulation and visualization packages
       'devtools',  # Used to install packages from GitHub
-      'fuzzyjoin',
-      'pbapply',
+      'fuzzyjoin', # Usefull genome_join
+      'pbapply',   # Long loops with progress bars and parallel processing
       'rmarkdown', # For reproducible reporting
-      'caTools',   # Required by rmarkdown in RStudio
-      'R.utils'
+      'caTools'    # Required by rmarkdown in RStudio
     ),
     Bioconductor = c(
       'BiocInstaller',               # Install packages from Bioconductor
       'BSgenome',                    # Biostrings genome object infrastructure
-      #'Biostrings',                  # DNA / RNA / Protein sequence manipulation
       'BSgenome.Hsapiens.UCSC.hg38', # Human genome reference GRCh38
       'BSgenome.Hsapiens.UCSC.hg19'  # Human genome reference GRCh37
     ),
