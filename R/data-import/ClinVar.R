@@ -1,5 +1,5 @@
 data_import$ClinVar_vcf_to_csv <- function(given   = 'data/ClinVar/clinvar.vcf.gz',
-                                           save_as = 'data/COSMIC/ClinVar.csv') {
+                                           save_as = 'data/ClinVar/ClinVar.csv') {
   
   read_vcf(given) %>%
     mutate(
