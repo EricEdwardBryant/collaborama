@@ -4,7 +4,7 @@
 # to include all currently installed packages.
 
 .Rprofile$install_requirements <- function(Rprofile = .Rprofile, check_only = FALSE) {
-
+  
   # Vectorized check for package installation status
   .installed <- function(pkgs) pkgs %in% rownames(utils::installed.packages())
 
@@ -44,6 +44,10 @@
   INSTALLED <- c(CRAN, Bioc, GitH)
 
   if (!check_only & length(INSTALLED)) {
+    message(
+      "For easy cleanup, this project's packages were installed into:\n",
+      Rprofile$Library_root
+    )
     message('If all packages installed successfully, please run .Rprofile$load_requirements()')
   }
 
