@@ -49,8 +49,8 @@
   )
 # =============================================================================
 
-source('R/startup/check-r-version.R') # Warning if not .Rprofile$R_version
 source('R/startup/configure-libs.R')  # As specified by .Rprofile$Library_root
 source('R/startup/configure-repos.R') # As specified in .Rprofile
 source('R/startup/install.R')         # Create .Rprofile$install_requirements()
 source('R/startup/load.R')            # Create .Rprofile$load_requirements()
+source('R/startup/check-r-version.R') # Warning if not .Rprofile$R_version
