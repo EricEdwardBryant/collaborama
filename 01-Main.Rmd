@@ -7,7 +7,7 @@ output:
     reference_docx: 'format/template.docx'
     pandoc_args: '--smart'
 params:
-  chunk_options: !r knitr::opts_chunk$set(echo = FALSE, message = FALSE, comment = '')
+  chunk_options: !r knitr::opts_chunk$set(echo = FALSE, message = FALSE, eval = FALSE, comment = '')
 ---
 
 __Eric Bryant__^1^, __Pierre Billon__^2^, and __Alberto Ciccia__^2,3,\*^ 
@@ -17,30 +17,43 @@ __Eric Bryant__^1^, __Pierre Billon__^2^, and __Alberto Ciccia__^2,3,\*^
 > ^3^ Lead Contact \
 > ^\*^ Correspondence: <ac3685@columbia.edu>
 
+<!--- 
+Keep Main.Rmd as simple as possible (just outline structure) 
+Note that fourth level header (i.e. ####) is defined as a first level header 
+with a page break in the format/template.docx word template.
+--->
+
 # SUMMARY
 
-```{r child = '2-Summary.Rmd'}
+**ABE makes A to G changes ... fill in the background**
+
+# INSTALL
+
+```{r child = '02-Install.Rmd'}
 ```
 
-# SETUP & REQUIREMENTS
+# DATA
 
-```{r child = '3-Setup-and-Requirements.Rmd'}
+```{r child = '03-Data.Rmd'}
 ```
 
 # ANALYSIS
 
-```{r child = '4-Analysis.Rmd'}
+```{r child = '04-Analysis.Rmd'}
 ```
 
-#### SESSION INFORMATION
+# FIGURES
 
-```{r message = TRUE, comment=''}
+```{r child = '05-Figures.Rmd'}
+```
+
+<!--- Page Break --->
+#### SESSION INFORMATION 
+
+```{r echo = FALSE, eval = TRUE, message = TRUE, comment=''}
 options(width = 101)
 .Rprofile$load_requirements(show_loaded = TRUE)
 ```
 
-#### REFERENCES 
-<!--- 
-4th level header in Word template is re-defined 
-as a 1st level header with page-break
---->
+<!--- Page Break --->
+#### REFERENCES <!--- Page Break --->
