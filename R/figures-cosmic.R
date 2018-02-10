@@ -1,4 +1,4 @@
-figures$cosmic_vep <- function(given_vep = 'data/COSMIC/VEP.csv') {
+figures_cosmic_vep <- function(given_vep = 'data/COSMIC/VEP.csv') {
   vep <- 
     read_csv(
       given_vep, 
@@ -91,7 +91,7 @@ figures$cosmic_vep <- function(given_vep = 'data/COSMIC/VEP.csv') {
     ggsave('figures/COSMIC-VEP-nonsense-from-codon-to-codon.pdf')
 }
 
-figures$cosmic_consequence <- function() {
+figures_cosmic_consequence <- function() {
   data <- 
     read_tsv('data/COSMIC/CosmicMutantExport.tsv.gz') %>%
     filter(

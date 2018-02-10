@@ -1,4 +1,4 @@
-analyses$cosmic_vep <- function(given_vcf  = 'data/COSMIC/CosmicCodingMuts.vcf.gz',
+analyses_cosmic_vep <- function(given_vcf  = 'data/COSMIC/CosmicCodingMuts.vcf.gz',
                                 given_cds = 'data/CDS/Hsapiens-UCSC-hg38-validated.csv',
                                 save_as   = 'data/COSMIC/VEP.csv',
                                 genome    = BSgenome.Hsapiens.UCSC.hg38::Hsapiens) {
@@ -12,9 +12,9 @@ analyses$cosmic_vep <- function(given_vcf  = 'data/COSMIC/CosmicCodingMuts.vcf.g
     write_csv(save_as)
 }
 
-analyses$COSMIC_vcf_to_csv <- function(given   = 'data/COSMIC/CosmicCodingMuts.vcf.gz',
+analyses_cosmic_vcf_to_csv <- function(given   = 'data/COSMIC/CosmicCodingMuts.vcf.gz',
                                        save_as = 'data/COSMIC/CosmicCodingMuts.csv') {
-  fxn$read_vcf(given) %>%
+  read_vcf(given) %>%
     mutate(
       # Fix chromosome names to match names(BSgenome.Hsapiens.UCSC.hg38::Hsapiens)
       CHROM = str_c('chr', CHROM) %>% str_replace('MT', 'M'), 
@@ -32,7 +32,7 @@ analyses$COSMIC_vcf_to_csv <- function(given   = 'data/COSMIC/CosmicCodingMuts.v
     write_csv(save_as)
 }
 
-analyses$COSMIC_nonsense <- function(given   = 'data/COSMIC/CosmicCodingMuts.csv',
+analyses_cosmic_nonsense <- function(given   = 'data/COSMIC/CosmicCodingMuts.csv',
                                      save_as = 'data/COSMIC/CosmicNonsense.csv') {
   # Nonsnse mutations will be annotated with a * at the end of the AA field 
   read_csv(given, col_types = cols()) %>%

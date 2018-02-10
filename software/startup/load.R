@@ -18,12 +18,8 @@
     return(invisible())
   }
 
-  # Function to source all R scripts in a directory while creating empty lists
-  # with directory name, such that scripts can assign objects within their
-  # directory list
-  .source_directory <- function(from) {
-    assign(gsub('[ -]', '_', basename(from)), list(), envir = globalenv())
-    invisible(lapply(list.files(from, '[.][Rr]', full.names = T), source))
+  .source_directory <- function(from, ext = '[.][Rr]$') {
+    invisible(lapply(list.files(from, ext, full.names = T), source))
   }
 
   # Load libraries and source directories

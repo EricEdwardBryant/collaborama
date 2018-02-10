@@ -1,8 +1,7 @@
-data_import$snv_to_stop <- function() {
+data_snv_to_stop <- function() {
   code <- 
     Biostrings::GENETIC_CODE %>%
-    enframe(name = 'codon', value = 'aa') #%>%
-    #mutate(codon_rev = fxn$dna_reverse_complement(codon_fwd))
+    enframe(name = 'codon', value = 'aa')
   
   mutation_types <- tribble(
     ~from, ~to, ~mutation_symbol, ~mutation_type,
@@ -32,7 +31,7 @@ data_import$snv_to_stop <- function() {
         str_detect(snv_type, '3') ~ str_sub(codon, 3, 3)
       ),
       to = str_sub(snv_type, 5, 5),
-      snv_aa = fxn$dna_translate(snv_codon)
+      snv_aa = translate(snv_codon)
     ) %>%
     filter(aa != snv_aa)
   

@@ -1,4 +1,4 @@
-figures$messense_silent_nonsense <- function(given_veps = c(clinvar = 'data/ClinVar/VEP.csv',
+figures_messense_silent_nonsense <- function(given_veps = c(clinvar = 'data/ClinVar/VEP.csv',
                                                             cosmic  = 'data/COSMIC/VEP.csv',
                                                             exac    = 'data/ExAc/VEP.csv'),
                                              save_as = 'figures/messense-silent-nonsense.pdf') {
@@ -26,7 +26,7 @@ figures$messense_silent_nonsense <- function(given_veps = c(clinvar = 'data/Clin
   exac <- read_csv(given_veps['exac'],    col_types = columns) %>% distinct()
   
   data <- bind_rows(lst(clin, cosm, exac), .id = 'dataset')
-
+  
   summary <-
     data %>%
     filter(mutation_type %in% type_order) %>%

@@ -1,6 +1,6 @@
 # Question:
 # What is the general distribution of variant types in ClinVar?
-analyses$clinvar_summary_of_variant_types <- function(given = 'data/ClinVar/ClinVar.csv',
+analysis_clinvar_summary_of_variant_types <- function(given = 'data/ClinVar/ClinVar.csv',
                                                       save_as = 'data/ClinVar/ClinVar-summary-variant-types.csv') {
   read_csv(given, col_types = cols()) %>%
     mutate(
@@ -19,7 +19,7 @@ analyses$clinvar_summary_of_variant_types <- function(given = 'data/ClinVar/Clin
     write_csv(save_as)
 }
 
-analyses$clinvar_vep <- function(given_vcf = 'data/ClinVar/clinvar.vcf.gz',
+analysis_clinvar_vep <- function(given_vcf = 'data/ClinVar/clinvar.vcf.gz',
                                  given_cds = 'data/CDS/Hsapiens-UCSC-hg38-validated.csv',
                                  save_as   = 'data/ClinVar/VEP.csv',
                                  genome    = BSgenome.Hsapiens.UCSC.hg38::Hsapiens) {
@@ -46,7 +46,7 @@ analyses$clinvar_vep <- function(given_vcf = 'data/ClinVar/clinvar.vcf.gz',
 # 5  C>G (G>C)
 # 6  C>T (G>A)
 
-analyses$clinvar_summary_of_creating_vs_reverting <- function(given   = 'data/ClinVar/ClinVar.csv',
+analysis_clinvar_summary_of_creating_vs_reverting <- function(given   = 'data/ClinVar/ClinVar.csv',
                                                               save_as = 'data/ClinVar/ClinVar-creating-vs-reverting.csv',
                                                               Genome  = BSgenome.Hsapiens.UCSC.hg38::Hsapiens) {
     read_csv(given, col_types = cols()) %>%

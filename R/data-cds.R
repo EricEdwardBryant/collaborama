@@ -1,11 +1,11 @@
-data_import$CDS_hg38 <- function(save_as = 'data/CDS/Hsapiens-UCSC-hg38.csv') {
+data_cds_hg38 <- function(save_as = 'data/CDS/Hsapiens-UCSC-hg38.csv') {
   if (!file.exists(save_as)) {
     iSTOP::CDS_Hsapiens_UCSC_hg38() %>% 
       write_csv(save_as)
   }
 }
 
-data_import$CDS_hg19 <- function(save_as = 'data/CDS/Hsapiens-UCSC-hg19.csv') {
+data_cds_hg19 <- function(save_as = 'data/CDS/Hsapiens-UCSC-hg19.csv') {
   if (!file.exists(save_as)) {
     iSTOP::CDS(
       tx      = 'http://hgdownload.soe.ucsc.edu/goldenPath/hg19/database/knownGene.txt.gz',
@@ -21,7 +21,7 @@ data_import$CDS_hg19 <- function(save_as = 'data/CDS/Hsapiens-UCSC-hg19.csv') {
   }
 }
 
-data_import$CDS_contiguous_intervals <- function(given = 'data/CDS/Hsapiens-UCSC-hg38.csv', 
+data_cds_contiguous_intervals <- function(given = 'data/CDS/Hsapiens-UCSC-hg38.csv', 
                                                  save_as = 'data/CDS/Hsapiens-UCSC-hg38-contiguous-intervals.csv') {
   # All distinct CDS coordinates for genes
   CDS <- 
