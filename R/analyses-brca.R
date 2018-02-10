@@ -1,4 +1,4 @@
-analyses$BRCA_summary <- function() {
+analyses_brca_summary <- function() {
   ClinVar_Model_CtoT <- read_csv("data/Guides/ClinVar-Model-CtoT.csv")
   # Note that there are 5 variants annotated as BRCA1:672|NBR2:10230. none are targetable by ABE or BE3
   ClinVar_Model_CtoT %>% filter(GENEINFO %in% c('BRCA1:672', 'BRCA2:675')) -> BRCA

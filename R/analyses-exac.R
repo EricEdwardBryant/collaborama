@@ -1,4 +1,4 @@
-analyses$exac_snv_counts <- function(given = 'data/ExAc/ExAC.r1.sites.vep.vcf.gz',
+analyses_exac_snv_counts <- function(given = 'data/ExAc/ExAC.r1.sites.vep.vcf.gz',
                                      save_as = 'data/ExAc/exac-snv-counts.csv') {
   
   callback <- function(x, pos) {
@@ -28,7 +28,7 @@ analyses$exac_snv_counts <- function(given = 'data/ExAc/ExAC.r1.sites.vep.vcf.gz
   write_csv(exac, save_as)
 }
 
-analyses$exac_vep <- function(given_vcf   = 'data/ExAc/ExAC.r1.sites.vep.vcf.gz',
+analyses_exac_vep <- function(given_vcf   = 'data/ExAc/ExAC.r1.sites.vep.vcf.gz',
                               given_cds   = 'data/CDS/Hsapiens-UCSC-hg19-validated.csv',
                               genome  = BSgenome.Hsapiens.UCSC.hg19::Hsapiens,
                               save_as = 'data/ExAc/VEP.csv') {

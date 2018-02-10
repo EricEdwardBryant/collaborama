@@ -1,3 +1,5 @@
+<!--- Analyses go here (models, data summaries, derived datasets) --->
+
 ## Guide design
 
 ```{r}

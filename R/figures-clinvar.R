@@ -1,7 +1,6 @@
-figures$ClinVar_summary <- function(given = c(all = 'data/ClinVar/ClinVar-summary-variant-types.csv',
+figures_clinvar_summary <- function(given = c(all = 'data/ClinVar/ClinVar-summary-variant-types.csv',
                                               SNV = 'data/ClinVar/ClinVar-creating-vs-reverting.csv'),
-                                    save_as = 'figures/Clinvar-summary.pdf'
-                                    ) {
+                                    save_as = 'figures/Clinvar-summary.pdf') {
 
   # Color and ordering
   order = c(
@@ -57,6 +56,6 @@ figures$ClinVar_summary <- function(given = c(all = 'data/ClinVar/ClinVar-summar
 }
 
 
-figures$clinvar_snv_counts <- function(given = 'data/ClinVar/ClinVar-creating-vs-reverting.csv') {
+figures_clinvar_snv_counts <- function(given = 'data/ClinVar/ClinVar-creating-vs-reverting.csv') {
   read_csv(given)
 }

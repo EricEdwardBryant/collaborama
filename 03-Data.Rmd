@@ -1,24 +1,4 @@
-## SOFTWARE
-
-This project is available on [GitHub](https://github.com/CicciaLab/Manuscript-ABE.git). The analysis requires [R](https://cloud.r-project.org), and recommends [RStudio](https://www.rstudio.com/products/rstudio/download/#download). After installing R & RStudio, and downloading this project, open the RStudio project file named `Manuscript-ABE.Rproj`. The analysis will aslo require several R packages. The following command will check for any missing required packages, and install them to ``r .Rprofile$Library_root`` (this directory can be changed by modifying the project's `.Rprofile`).
-
-```{r echo = TRUE}
-.Rprofile$install_requirements()
-```
-
-After all packages have been installed, prepare the workspace by loading requirements with the following command.
-
-```{r echo = TRUE, results = 'hide'}
-.Rprofile$load_requirements()
-```
-
-If everything is properly installed, you should see the following message in the R console.
-
-```{r echo = FALSE'}
-.Rprofile$load_requirements()
-```
-
-## DATASETS
+<!--- Describe raw data here (just the starting material) --->
 
 Before beginning the analysis, there are several datasets that must be downloaded. The following sections provide detailed instructions for downloading all required datasets.
 

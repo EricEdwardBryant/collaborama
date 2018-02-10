@@ -1,0 +1,18 @@
+
+This project is available on [GitHub](https://github.com/EricEdwardBryant/collaborama.git). The analysis requires [R](https://cloud.r-project.org), and recommends [RStudio](https://www.rstudio.com/products/rstudio/download/#download). After installing R & RStudio, and downloading this project, open the RStudio project file named `Manuscript-ABE.Rproj`. The analysis will require several R packages. The following command will check for any missing required packages, and install them to ``r .Rprofile$Library_root`` (this directory can be changed by modifying the project's `.Rprofile`).
+
+```{r echo = TRUE, eval = FALSE}
+.Rprofile$install_requirements()
+```
+
+After all packages have been installed, prepare the workspace by loading requirements with the following command.
+
+```{r echo = TRUE, eval = FALSE}
+.Rprofile$load_requirements()
+```
+
+If everything is properly installed, you should see the following message in the R console.
+
+```{r eval = TRUE, echo = FALSE}
+.Rprofile$load_requirements()
+```

@@ -1,4 +1,4 @@
-figures$exac_snv_counts <- function(given = 'data/ExAc/exac-snv-counts.csv', 
+figures_exac_snv_counts <- function(given = 'data/ExAc/exac-snv-counts.csv', 
                                     save_as = 'figures/exac-snv-counts.pdf') {
   # Color and ordering
   order = c(
@@ -45,7 +45,7 @@ figures$exac_snv_counts <- function(given = 'data/ExAc/exac-snv-counts.csv',
     ggsave(save_as, width = 2.5, height = 11)
 }
 
-figures$exac_vep <- function(given_vep = 'data/ExAc/VEP.csv') {
+figures_exac_vep <- function(given_vep = 'data/ExAc/VEP.csv') {
   vep <- 
     read_csv(
       given_vep, 

@@ -1,5 +1,5 @@
-data_import$ClinVar_vcf_to_csv <- function(given   = 'data/ClinVar/clinvar.vcf.gz',
-                                           save_as = 'data/ClinVar/ClinVar.csv') {
+data_clinvar_vcf_to_csv <- function(given   = 'data/ClinVar/clinvar.vcf.gz',
+                                    save_as = 'data/ClinVar/ClinVar.csv') {
   
   read_vcf(given) %>%
     mutate(
@@ -33,8 +33,8 @@ data_import$ClinVar_vcf_to_csv <- function(given   = 'data/ClinVar/clinvar.vcf.g
     write_csv(save_as)
 }
 
-data_import$ClinVar_nonsense <- function(given   = 'data/ClinVar/ClinVar.csv',
-                                         save_as = 'data/ClinVar/ClinVar-Nonsense.csv') {
+data_clinvar_nonsense <- function(given   = 'data/ClinVar/ClinVar.csv',
+                                  save_as = 'data/ClinVar/ClinVar-Nonsense.csv') {
   # Nonsnse mutations will be annotated with a * at the end of the AA field 
   read_csv(given, col_types = cols()) %>%
     filter(str_detect(MC, 'nonsense')) %>%
