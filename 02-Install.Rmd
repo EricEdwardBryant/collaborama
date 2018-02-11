@@ -13,6 +13,6 @@ After all packages have been installed, prepare the workspace by loading require
 
 If everything is properly installed, you should see the following message in the R console.
 
-```{r eval = TRUE, echo = FALSE}
+```{r eval = TRUE, echo = FALSE, message = TRUE}
 .Rprofile$load_requirements()
 ```

@@ -7,8 +7,32 @@ output:
     reference_docx: 'format/template.docx'
     pandoc_args: '--smart'
 params:
-  chunk_options: !r knitr::opts_chunk$set(echo = FALSE, message = FALSE, eval = FALSE, comment = '')
+  # What sections should be re-executed?
+  data: no
+  analyses: no
+  figures: no
 ---
+
+<!--- README ----
+Use rmarkdown::render('01-Main.Rmd') to compile this report
+
+Keep Main.Rmd as simple as possible. It should just contain author information,
+a summary of this document, and an outline of the document structure.
+
+Save data to data directory. Save figures to figure directory. Include figures
+from pre-compiled versions to speed up document compilation and to make the 
+figures directory the primary source of figures for this document.
+
+Reference literature using @citekey or [@citekey] using citekeys in 
+references/library.bib (BibTex format reference library)
+
+Note that fourth level header (i.e. ####) is defined as a first level header 
+with a page break in the format/template.docx word template.
+--->
+
+```{r knitr-setup, include = FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, comment = '')
+```
 
 __Eric Bryant__^1^, __Pierre Billon__^2^, and __Alberto Ciccia__^2,3,\*^ 
 
@@ -16,12 +40,6 @@ __Eric Bryant__^1^, __Pierre Billon__^2^, and __Alberto Ciccia__^2,3,\*^
 > ^2^ Department of Genetics & Development, Columbia University Medical Center, New York, NY, USA \
 > ^3^ Lead Contact \
 > ^\*^ Correspondence: <ac3685@columbia.edu>
-
-<!--- 
-Keep Main.Rmd as simple as possible (just outline structure) 
-Note that fourth level header (i.e. ####) is defined as a first level header 
-with a page break in the format/template.docx word template.
---->
 
 # SUMMARY
 
@@ -50,10 +68,10 @@ with a page break in the format/template.docx word template.
 <!--- Page Break --->
 #### SESSION INFORMATION 
 
-```{r echo = FALSE, eval = TRUE, message = TRUE, comment=''}
+```{r echo = FALSE, message = TRUE, comment = ''}
 options(width = 101)
 .Rprofile$load_requirements(show_loaded = TRUE)
 ```
 
 <!--- Page Break --->
-#### REFERENCES <!--- Page Break --->
+#### REFERENCES

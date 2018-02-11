@@ -1,4 +1,8 @@
 <!--- Describe raw data here (just the starting material) --->
+```{r include = FALSE}
+knitr::opts_chunk$set(eval = params$data, echo = TRUE)
+```
+
 
 Before beginning the analysis, there are several datasets that must be downloaded. The following sections provide detailed instructions for downloading all required datasets.
 
@@ -6,7 +10,7 @@ Before beginning the analysis, there are several datasets that must be downloade
 
 Coding sequence (CDS) coordinates can be downloaded from the UCSC genome browser with the following command.
 
-```{r echo = TRUE, eval = FALSE}
+```{r}
 data_import$CDS(save_as = 'data/CDS/Hsapiens-UCSC-hg38.csv')
 data_import$CDS_contiguous_intervals(
   given   = 'data/CDS/Hsapiens-UCSC-hg38.csv', 
@@ -28,7 +32,7 @@ get /files/grch38/cosmic/v83/VCF/CosmicCodingMuts.vcf.gz
 
 After downloading the main Cosmic dataset, we will generate three processed versions of this dataset using the following commands. 
 
-```{r echo = TRUE, eval = FALSE}
+```{r}
 data_import$COSMIC_vcf_to_csv(
   given   = 'data/COSMIC/CosmicCodingMuts.vcf.gz',
   save_as = 'data/COSMIC/Cosmic-Coding.csv'
@@ -54,7 +58,7 @@ wget ftp://ftp.ncbi.nlm.nih.gov/pub/clinvar/README_VCF.txt
 wget ftp://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/clinvar.vcf.gz
 ```
 
-```{r echo = TRUE, eval = FALSE}
+```{r}
 data_import$ClinVar_vcf_to_csv(
   given   = 'data/ClinVar/clinvar.vcf.gz',
   save_as = 'data/ClinVar/ClinVar.csv'

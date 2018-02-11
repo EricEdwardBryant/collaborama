@@ -1,1 +1,4 @@
 <!--- Figures and Figure legends go here --->
+```{r include = FALSE}
+knitr::opts_chunk$set(eval = params$figures, echo = TRUE)
+```
