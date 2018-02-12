@@ -13,6 +13,13 @@ params:
   figures: no
 ---
 
+__Eric Bryant__^1^, __Pierre Billon__^2^, and __Alberto Ciccia__^2,3,\*^ 
+
+> ^1^ Department of Biological Sciences, Columbia University, New York, NY, USA \
+> ^2^ Department of Genetics & Development, Columbia University Medical Center, New York, NY, USA \
+> ^3^ Lead Contact \
+> ^\*^ Correspondence: <ac3685@columbia.edu>
+
 <!--- README ----
 Use rmarkdown::render('01-Main.Rmd') to compile this report
 
@@ -29,13 +36,6 @@ references/library.bib (BibTex format reference library)
 Note that fourth level header (i.e. ####) is defined as a first level header 
 with a page break in the format/template.docx word template.
 --->
-
-__Eric Bryant__^1^, __Pierre Billon__^2^, and __Alberto Ciccia__^2,3,\*^ 
-
-> ^1^ Department of Biological Sciences, Columbia University, New York, NY, USA \
-> ^2^ Department of Genetics & Development, Columbia University Medical Center, New York, NY, USA \
-> ^3^ Lead Contact \
-> ^\*^ Correspondence: <ac3685@columbia.edu>
 
 # SUMMARY
 
