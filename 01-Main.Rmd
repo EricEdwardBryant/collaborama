@@ -30,10 +30,6 @@ Note that fourth level header (i.e. ####) is defined as a first level header
 with a page break in the format/template.docx word template.
 --->
 
-```{r knitr-setup, include = FALSE}
-knitr::opts_chunk$set(echo = FALSE, message = FALSE, comment = '')
-```
-
 __Eric Bryant__^1^, __Pierre Billon__^2^, and __Alberto Ciccia__^2,3,\*^ 
 
 > ^1^ Department of Biological Sciences, Columbia University, New York, NY, USA \
@@ -45,22 +41,26 @@ __Eric Bryant__^1^, __Pierre Billon__^2^, and __Alberto Ciccia__^2,3,\*^
 
 **ABE makes A to G changes ... fill in the background**
 
-# INSTALL
+<!--- Page Break --->
+#### INSTALL
 
 ```{r child = '02-Install.Rmd'}
 ```
 
-# DATA
+<!--- Page Break --->
+#### DATA
 
 ```{r child = '03-Data.Rmd'}
 ```
 
-# ANALYSIS
+<!--- Page Break --->
+#### ANALYSIS
 
 ```{r child = '04-Analysis.Rmd'}
 ```
 
-# FIGURES
+<!--- Page Break --->
+#### FIGURES
 
 ```{r child = '05-Figures.Rmd'}
 ```
@@ -68,8 +68,7 @@ __Eric Bryant__^1^, __Pierre Billon__^2^, and __Alberto Ciccia__^2,3,\*^
 <!--- Page Break --->
 #### SESSION INFORMATION 
 
-```{r echo = FALSE, message = TRUE, comment = ''}
-options(width = 101)
+```{r eval = TRUE, echo = FALSE, message = TRUE, comment = ''}
 .Rprofile$load_requirements(show_loaded = TRUE)
 ```
 
