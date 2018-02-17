@@ -17,7 +17,7 @@ analysis_cds_validation_hg19 <- function(given   = 'data/CDS/Hsapiens-UCSC-hg19.
 
 # ---- Transcript features ----
 analysis_cds_tx_features_hg38 <- function(given   = 'data/CDS/Hsapiens-UCSC-hg38-validated.csv',
-                                          save_as = 'data/CDS/Hsapiens-UCSC-validated-hg38-tx-features.csv',
+                                          save_as = 'data/CDS/Hsapiens-UCSC-hg38-validated-tx-features.csv',
                                           genome  = BSgenome.Hsapiens.UCSC.hg38::Hsapiens) {
   read_csv(given, col_types = cols()) %>%
     # Extract and construct coding sequenes from CDS exon coordinates
