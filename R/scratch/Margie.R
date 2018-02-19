@@ -26,23 +26,19 @@ sp_all <- length(subset(vep$mutation_type, vep$mutation_type == "Splicing")) #29
 length(unique(vep$gene)) #18963 unique genes
 genename <- c(unique(subset(vep$gene, vep$mutation_type == "Nonsense"))) #17508 genes have nonsense mutations
 
-save(hugo, file = "data/COSMIC/cosmic_nsm_atleast5_hugo.RData") #File previously made with genes with 5 nsm, but found faster way to do it later
-load("/Users/TinyDragon/github/collaborama/data/COSMIC/cosmic_nsm_atleast5_hugo.RData")
-
-
 #subset to make loop faster
 features = c("gene", "mutation_type")
 vepselect = select(vep, features)
-#vepselect = subset(vepselect, vepselect$gene %in% hugo)
 
-save(vepselect, file = "data/COSMIC/VEP_subset_atleast5.RData")
-load("/Users/TinyDragon/github/collaborama/data/COSMIC/VEP_subset_atleast5.RData")
+#save(vepselect, file = "data/COSMIC/VEP_subset_atleast5.RData")
+#load("/Users/TinyDragon/github/collaborama/data/COSMIC/VEP_subset_atleast5.RData")
 
-#Read file containing census genes
+#Read file containing COSMIC Census
 cosmic_genes <- read.csv("/Users/TinyDragon/github/collaborama/data/COSMIC/Census_allMon Nov 20 16_36_34 2017.csv")
 
 ##This data contains two "Tiers" of genes. Tier 1 contains established driver genes 
 #and Tier 2 genes have less but emerging evidence supporting their role in cancer
+#I elected to combine gene classes as below, and classify ambiguous and unclassified ones as "Other"
 
 #Summary of cancer role status for each gene
 table(cosmic_genes$Role.in.Cancer)
@@ -69,12 +65,9 @@ write.table(vepcircos, file = "/Users/TinyDragon/github/collaborama/data/COSMIC/
 #vepcircos <- count(vepjoin, Role.in.Cancer, mutation_type)
 #vepcircos <- aggregate(Role.in.Cancer ~ mutation_type, data = vepjoin, FUN = sum)
 
-
 vepsum <- count(vepselect, gene, mutation_type) 
 # <- left_join(vepsum, cosmic_genes2) %>% #Commented out because I want to join it later
   #mutate(Role.in.Cancer = replace(Role.in.Cancer, is.na(Role.in.Cancer), "Other")) 
-
-
 
 #Now transforming data to make types of mutations their own variables, gene by gene
 vepsumwide  = gather(vepsum, variable, value, mutation_type) %>%
@@ -82,22 +75,21 @@ vepsumwide  = gather(vepsum, variable, value, mutation_type) %>%
   group_by(gene) %>% 
   #mutate(group_row = 1:n()) %>%
   spread(value, n, fill = 0) %>% #having it fill the missings with 0 instead of NA since it just means the gene didn't have any of whatever type of mutation
-  mutate(total_mut =
-                       Frameshift + Missense + Nonsense + Silent + Splicing)
+  mutate(total_mut = Frameshift + Missense + Nonsense + Silent + Splicing)
 
 #Finally, classify genes based on information from COSMIC
 vepsumwide <- left_join(vepsumwide, cosmic_genes2) %>%
   mutate(Role.in.Cancer = replace(Role.in.Cancer, is.na(Role.in.Cancer), "Other")) 
 
 vepsumwide <- mutate(vepsumwide, propnsm = Nonsense/total_mut) #make variable for proportion of nonsense to total mutation
-vepsubset <- subset(vepsumwide, vepsumwide$Nonsense > 5) #filter for those with >5 NSM
-vepsubset <- subset(vepsubset, vepsubset$propnsm > 0.078) #filter for proportion greater than the population mean estimated by genome-wide rate
 
 #Test proportion of nonsense
 #BUT how to test since one gene will be contributing the genome-wide rate? 
 #Not really a two-sample test, since one sample is part of the other. Hmmm
 
 #Just look at top?
+vepsubset <- subset(vepsumwide, vepsumwide$Nonsense > 5) #filter for those with >5 NSM
+vepsubset <- subset(vepsubset, vepsubset$propnsm > 0.078) #filter for proportion greater than the population mean estimated by genome-wide rate
 
 
 ###################################################
@@ -199,6 +191,9 @@ for (i in 100:102){   #test with a few
 } #end loop
 end.time = Sys.time() #3.34 hours
 end.time - start.time #Took 49 minutes
+
+save(hugo, file = "data/COSMIC/cosmic_nsm_atleast5_hugo.RData") #File previously made with genes with 5 nsm, but found faster way to do it later
+load("/Users/TinyDragon/github/collaborama/data/COSMIC/cosmic_nsm_atleast5_hugo.RData")
 
 
 #########################################
