@@ -15,6 +15,30 @@ analysis_cds_validation_hg19 <- function(given   = 'data/CDS/Hsapiens-UCSC-hg19.
     write_csv(save_as)
 }
 
+# ---- Transcript features ----
+analysis_cds_tx_features_hg38 <- function(given   = 'data/CDS/Hsapiens-UCSC-hg38-validated.csv',
+                                          save_as = 'data/CDS/Hsapiens-UCSC-hg38-validated-tx-features.csv',
+                                          genome  = BSgenome.Hsapiens.UCSC.hg38::Hsapiens) {
+  read_csv(given, col_types = cols()) %>%
+    # Extract and construct coding sequenes from CDS exon coordinates
+    mutate(exon_seq = get_genomic_sequence(chr, strand, start, end, genome)) %>%
+    arrange(gene, tx, exon) %>%
+    group_by(gene, tx, chr) %>%
+    summarise(
+      sequence   = str_c(exon_seq, collapse = ''),
+      cds_length = str_length(sequence),
+      aa_length  = cds_length / 3,
+      n_exons    = n(),
+      n_g        = str_count(sequence, 'G'),
+      n_c        = str_count(sequence, 'C'),
+      n_a        = str_count(sequence, 'A'),
+      n_t        = str_count(sequence, 'T')
+    ) %>%
+    select(-sequence) %>%
+    group_by(gene, chr) %>%
+    mutate(n_isoforms = n()) %>% # isoforms for a given gene on a given chromosome
+    write_csv(save_as)
+}
 
 # ---- Codon counts ----
 analysis_cds_codon_counts <- function(given   = 'data/CDS/Hsapiens-UCSC-hg38-validated.csv',

@@ -7,7 +7,10 @@ output:
     reference_docx: 'format/template.docx'
     pandoc_args: '--smart'
 params:
-  chunk_options: !r knitr::opts_chunk$set(echo = FALSE, message = FALSE, eval = FALSE, comment = '')
+  # What sections should be re-executed?
+  data: no
+  analyses: no
+  figures: no
 ---
 
 __Eric Bryant__^1^, __Pierre Billon__^2^, and __Alberto Ciccia__^2,3,\*^ 
@@ -17,8 +20,19 @@ __Eric Bryant__^1^, __Pierre Billon__^2^, and __Alberto Ciccia__^2,3,\*^
 > ^3^ Lead Contact \
 > ^\*^ Correspondence: <ac3685@columbia.edu>
 
-<!--- 
-Keep Main.Rmd as simple as possible (just outline structure) 
+<!--- README ----
+Use rmarkdown::render('01-Main.Rmd') to compile this report
+
+Keep Main.Rmd as simple as possible. It should just contain author information,
+a summary of this document, and an outline of the document structure.
+
+Save data to data directory. Save figures to figure directory. Include figures
+from pre-compiled versions to speed up document compilation and to make the 
+figures directory the primary source of figures for this document.
+
+Reference literature using @citekey or [@citekey] using citekeys in 
+references/library.bib (BibTex format reference library)
+
 Note that fourth level header (i.e. ####) is defined as a first level header 
 with a page break in the format/template.docx word template.
 --->
@@ -27,22 +41,26 @@ with a page break in the format/template.docx word template.
 
 **ABE makes A to G changes ... fill in the background**
 
-# INSTALL
+<!--- Page Break --->
+#### INSTALL
 
 ```{r child = '02-Install.Rmd'}
 ```
 
-# DATA
+<!--- Page Break --->
+#### DATA
 
 ```{r child = '03-Data.Rmd'}
 ```
 
-# ANALYSIS
+<!--- Page Break --->
+#### ANALYSIS
 
 ```{r child = '04-Analysis.Rmd'}
 ```
 
-# FIGURES
+<!--- Page Break --->
+#### FIGURES
 
 ```{r child = '05-Figures.Rmd'}
 ```
@@ -50,10 +68,9 @@ with a page break in the format/template.docx word template.
 <!--- Page Break --->
 #### SESSION INFORMATION 
 
-```{r echo = FALSE, eval = TRUE, message = TRUE, comment=''}
-options(width = 101)
+```{r eval = TRUE, echo = FALSE, message = TRUE, comment = ''}
 .Rprofile$load_requirements(show_loaded = TRUE)
 ```
 
 <!--- Page Break --->
-#### REFERENCES <!--- Page Break --->
+#### REFERENCES

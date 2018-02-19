@@ -10,11 +10,8 @@
     libs <- unlist(libs)
     inst <- utils::installed.packages()
     # Only worry about non-standard pkgs and the specified libs
-    installed_packages <- inst[
-      is.na(inst[,'Priority']) & (inst[,'LibPath'] %in% normalizePath(libs)),
-      'Package'
-    ] 
-    pkgs %in% installed_packages
+    installed <- inst[inst[,'LibPath'] %in% normalizePath(libs), 'Package']
+    pkgs %in% installed
   }
 
   # Vectorized extraction of GitHub package commit SHA (i.e. version)
