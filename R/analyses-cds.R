@@ -43,7 +43,7 @@ analysis_cds_tx_features_hg38 <- function(given   = 'data/CDS/Hsapiens-UCSC-hg38
 # ---- Codon counts ----
 analysis_cds_codon_counts <- function(given   = 'data/CDS/Hsapiens-UCSC-hg38-validated.csv',
                                       save_as = 'data/CDS/Hsapiens-UCSC-hg38-validated-codon-counts.csv') {
-
+  
   genome <- BSgenome.Hsapiens.UCSC.hg38::Hsapiens
   
   read_csv(given, col_types = cols()) %>%
@@ -62,6 +62,38 @@ analysis_cds_codon_counts <- function(given   = 'data/CDS/Hsapiens-UCSC-hg38-val
     unnest() %>% # expands the list of data frames in codon_counts to their own columns
     write_csv(save_as)
 }
+
+
+analysis_cds_nonsense_counts <-function(given   = "data/CDS/Hsapiens-UCSC-hg38-validated-codon-counts.csv",
+                                        save_as = 'data/CDS/Hsapiens-UCSC-hg38-validated-nonsense-counts.csv'){ 
+  
+  counts %>%
+    select(tx, gene, cds_length, codon, codon_count) %>%
+    spread(codon, codon_count, fill = 0) %>%
+    mutate(
+      AG = 0,
+      GA = CAG + CAA + CGA + (2*TGG), 
+      GT = TCG + GAG + TAC + GAA + TCA + TGC + GGA,
+      AC = TAT + TTA,
+      GC = TAC + TCA,
+      AT = AAG + TTG + TAT + AAA + TTA + AGA + TGT,
+      P.AG = AG / (n_a + n_t),
+      P.GA = GA / (n_g + n_c),
+      P.GT = GT / (n_g + n_c),
+      P.AC = AC / (n_a + n_t),
+      P.GC = GC / (n_g + n_c),
+      P.AT = AT / (n_a + n_t)
+      
+      # call from cosmiic the number of CT, GC ETC  to get the number of "trials" * the prob it's a nonesense 
+      # to get the expected number of that kind of mutations causing nonsense. sum accross all mutations types
+      # to get the total number of nonsense expected for that gene.
+    ) %>%
+    select(tx, gene, cds_length, AG, GA, GT, AC, GC, AT)
+}
+
+
+
+
 
 # ---- CDS analysis helper functions ----
 
